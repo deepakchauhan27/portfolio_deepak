@@ -34,7 +34,7 @@ const Message = mongoose.model("Message", messageSchema);
 app.get("/", (_req, res) => res.send("Backend OK"));
 
 // 4) Contact route: save a message
-app.post("/api/contact", async (req, res) => {
+app.post("/contact", async (req, res) => {
   try {
     const { name, email, message } = req.body;
     if (!name || !email || !message)
