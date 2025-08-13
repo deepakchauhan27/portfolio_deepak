@@ -10,9 +10,10 @@ app.use(express.json());
 app.use(cors({
   origin: [
     "http://localhost:5173",         // local React dev
-    "https://deepakportfolio.vercel.app" // replace with your deployed frontend
+    "https://deepak-portfolio-27.vercel.app/" // replace with your deployed frontend
   ],
-  methods: ["GET", "POST"],
+  methods: ["GET", "POST","PUT","DELETE"],
+  credentials:true
 }));
 
 // 1) Connect to MongoDB Atlas

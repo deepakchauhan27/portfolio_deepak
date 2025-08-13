@@ -6,7 +6,7 @@ function Contact() {
 
   const API_URL =
     process.env.NODE_ENV === "production"
-      ? "https://deepakportfolio27.vercel.app/api" // deployed backend URL
+      ? "https://deepak-portfolio-27.vercel.app/" // deployed backend URL
       : "http://localhost:5000/api";
 
   const handleChange = (e) => {
