@@ -4,10 +4,7 @@ function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState("");
 
-  const API_URL =
-    process.env.NODE_ENV === "production"
-      ? "https://deepak-portfolio-27.vercel.app/" // deployed backend URL
-      : "http://localhost:5000/api";
+  const API_URL =import.meta.env.VITE_API_URI;
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -18,7 +15,7 @@ function Contact() {
     setStatus("Sending...");
 
     try {
-      const res = await fetch(`${API_URL}/contact`, {
+      const res = await fetch(`${API_URL}/api/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
