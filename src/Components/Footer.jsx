@@ -39,7 +39,7 @@ function Footer() {
   };
 
   return (
-    <footer className="dark:bg-[#1e1e1e] text-white mt-16">
+    <footer className="dark:bg-[#05040d] text-white mt-16">
       <div className="max-w-6xl mx-auto py-12 px-6 grid md:grid-cols-3 gap-10">
         {/* Contact Form */}
         <div>

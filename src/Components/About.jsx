@@ -2,23 +2,24 @@ function About() {
   return (
     <section
       id="about"
-      className="py-5 px-3 md:px-20 dark:text-gray-100 w-full"
-      data-aos="fade-up"
+      className="py-5 px-3 md:px-20 
+      text-black w-4/4 flex flex-col justify-center"
+      // data-aos="fade-up"
     >
       <h2
-        className="text-xl md:text-2xl font-bold mb-6 text-center"
+        className="text-xl px-20 md:text-2xl font-mono mb-6 text-center justify-center"
         data-aos="fade-up"
       >
         About Me
       </h2>
 
       <p
-        className="text-sd leading-relaxed text-justify"
+        className="text-sd leading-relaxed text-justify px-20"
         data-aos="fade-up"
         data-aos-delay="100"
       >
         Hello! I'm{" "}
-        <span className="font-semibold text-blue-600 dark:text-orange-200">
+        <span className="font-mono text-indigo-500">
           Deepak Chauhan
         </span>
         , a passionate and driven web developer who loves turning ideas into
@@ -28,7 +29,7 @@ function About() {
       </p>
 
       <p
-        className="text-sd leading-relaxed mt-4 text-justify"
+        className="text-sd leading-relaxed mt-4 text-justify px-20"
         data-aos="fade-up"
         data-aos-delay="100"
       >
@@ -38,7 +39,7 @@ function About() {
       </p>
 
       <p
-        className="text-sd leading-relaxed mt-4 text-justify"
+        className="text-sd leading-relaxed mt-4 text-justify px-20"
         data-aos="fade-up"
         data-aos-delay="100"
       >

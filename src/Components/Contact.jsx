@@ -1,37 +1,6 @@
 import React, { useState } from "react";
 
 function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState("");
-
-  const API_URL = import.meta.env.VITE_API_URI;
-
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setStatus("Sending...");
-
-    try {
-      const res = await fetch(`${API_URL}/contact`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-
-      const data = await res.json();
-      if (res.ok) {
-        setStatus("Message sent successfully!");
-        setForm({ name: "", email: "", message: "" });
-      } else {
-        setStatus(data.error || "Something went wrong.");
-      }
-    } catch (error) {
-      setStatus("Failed to send message.");
-    }
-  };
 
   return (
     <section id="contact" className="py-16 px-6 md:px-20 dark:text-white">

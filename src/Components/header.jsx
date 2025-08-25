@@ -22,7 +22,7 @@ function Header_class() {
       } text-white`}
     >
       <div className="flex items-center justify-between px-6 py-4">
-        <div className="text-xl font-bold text-orange-200">Deepak Chauhan</div>
+        <div className="text-3xl font-bold text-indigo-500"><span className="">DC</span></div>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex text-sm font-semibold">
