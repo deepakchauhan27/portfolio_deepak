@@ -13,22 +13,22 @@ import "aos/dist/aos.css";
 function MainPage() {
   useEffect(() => {
     AOS.init({
-      duration: 1000, // animation duration in ms
+      duration: 500, // animation duration in ms
       once: false, // animation should happen only once
     });
   }, []);
 
   return (
-      <div className="bg-gradient-to-r  from-[#4adf8b] from-30% to-[#9ed662] to-90% font-mono ">
-        <div className="relative z-10">
-          <Header_class />
-          <Banner />
-          <About />
-          <Education />
-          <Tech_stack />
-          <Projects />
-          <Footer />
-        </div>
+    <div className="min-h-screen font-mono bg-gradient-to-br from-[#0f2027] via-[#2c5364] to-[#203a43] text-white">
+      <div className="relative z-10">
+        <Header_class />
+        <Banner />
+        <About />
+        <Education />
+        <Tech_stack />
+        <Projects />
+        <Footer />
+      </div>
     </div>
   );
 }
