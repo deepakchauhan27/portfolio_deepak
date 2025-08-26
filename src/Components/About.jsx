@@ -2,14 +2,15 @@ function About() {
   return (
     <section
       id="about"
-      className="relative py-16 px-6 md:px-20 
+      className="relative py-16 px-6 md:px-12 
       text-white w-full flex flex-col justify-center 
-      rounded-2xl "
+      rounded-2xl overflow-x-hidden"
       data-aos="fade-up"
     >
-      {/* Animated Glow Effect */}
-      <div className="absolute inset-0 rounded-2xl  opacity-30 animate-pulse"></div>
+      {/* Background overlay */}
+      <div className="absolute inset-0 rounded-2xl opacity-30 animate-pulse"></div>
 
+      {/* Heading */}
       <h2
         className="text-3xl md:text-4xl font-bold mb-6 text-center 
         relative z-10 tracking-wide 
@@ -19,8 +20,9 @@ function About() {
         About Me
       </h2>
 
+      {/* Paragraph 1 */}
       <p
-        className="text-base md:text-lg leading-relaxed text-justify relative z-10 px-2 md:px-12"
+        className="text-base md:text-lg leading-relaxed text-justify relative z-10 md:px-6"
         data-aos="fade-up"
         data-aos-delay="200"
       >
@@ -34,8 +36,9 @@ function About() {
         like <strong className="text-indigo-300">React.js, Tailwind CSS, and JavaScript</strong>.
       </p>
 
+      {/* Paragraph 2 */}
       <p
-        className="text-base md:text-lg leading-relaxed mt-6 text-justify relative z-10 px-2 md:px-12"
+        className="text-base md:text-lg leading-relaxed mt-6 text-justify relative z-10 px-2 md:px-6"
         data-aos="fade-right"
         data-aos-delay="400"
       >
@@ -44,8 +47,9 @@ function About() {
         problems with code and have a strong interest in modern UI/UX design.
       </p>
 
+      {/* Paragraph 3 */}
       <p
-        className="text-base md:text-lg leading-relaxed mt-6 text-justify relative z-10 px-2 md:px-12"
+        className="text-base md:text-lg leading-relaxed mt-6 text-justify relative z-10 px-2 md:px-6"
         data-aos="fade-left"
         data-aos-delay="600"
       >
