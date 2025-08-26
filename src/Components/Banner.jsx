@@ -27,7 +27,7 @@ function Banner() {
   return (
     <div className="relative flex flex-col-reverse md:flex-row items-center justify-center gap-10 px-6 md:px-16 pt-20 md:pt-32 pb-10 font-mono text-white">
   {/* Left Content */}
-  <div className="w-full md:w-1/2 px-6 flex flex-col mt-6 md:mt-0">
+  <div className="w-full md:w-1/2 px-5 flex flex-col mt-6 md:mt-0">
     <h2 className="typing-text text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
       Hello! I'm Deepak Chauhan
     </h2>
