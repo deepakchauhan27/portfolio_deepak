@@ -8,34 +8,33 @@ function Contact() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // Use deployed backend URL in production
-  const API_URL =
-    process.env.NODE_ENV === "production"
-      ? "https://portfolio-backend-j744.onrender.com/api"
-      : "http://localhost:5000/api";
-      
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("Sending...");
 
     try {
-      const response = await fetch(`${API_URL}/contact`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form), // ✅ fixed here
-      });
+      const response = await fetch(
+        "https://portfolio-backend-j744.onrender.com/api/contact",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(form), // ✅ send form data
+        }
+      );
 
-      const result = await response.json();
+      const data = await response.json();
 
-      if (result.success) {
-        setStatus("✅ Message sent successfully!");
-        setForm({ name: "", email: "", message: "" }); // reset form
+      if (data.success) {
+        setStatus("Message sent successfully ✅");
+        setForm({ name: "", email: "", message: "" }); // ✅ reset form
       } else {
-        setStatus("❌ Failed to send message. Try again!");
+        setStatus("Failed to send ❌");
       }
     } catch (error) {
-      console.error("❌ Error submitting form:", error);
-      setStatus("⚠️ Something went wrong. Please try again later.");
+      console.error(error);
+      setStatus("Error sending message ❌");
     }
   };
 
