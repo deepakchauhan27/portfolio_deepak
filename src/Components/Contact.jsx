@@ -4,10 +4,7 @@ function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState("");
 
-  const API_URL =
-    process.env.NODE_ENV === "production"
-      ? "https://portfolio-backend-j744.onrender.com/api" // deployed backend
-      : "http://localhost:5000/api"; // local backend
+  const API_URL = "https://portfolio-backend-j744.onrender.com/api";
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
