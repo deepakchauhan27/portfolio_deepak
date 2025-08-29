@@ -4,30 +4,29 @@ function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState("");
 
-  const API_URL = "https://portfolio-backend-j744.onrender.com/api";
-
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const API_URL =
+    process.env.NODE_ENV === "production"
+      ? "https://portfolio-backend-j744.onrender.com/api"
+      : "http://localhost:5000/api";
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      const res = await fetch(`${API_URL}/contact`, {
+      const response = await fetch(`${API_URL}/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify(formData),
       });
 
-      const data = await res.json();
-      if (data.success) {
-        setStatus("Message sent successfully!");
-        setForm({ name: "", email: "", message: "" });
-      } else {
-        setStatus("❌ Something went wrong. Try again!");
-      }
-    } catch (err) {
-      setStatus("⚠️ Server error. Please try later.");
+      const result = await response.json();
+      console.log("✅ Message sent:", result);
+    } catch (error) {
+      console.error("❌ Error submitting form:", error);
     }
   };
 
