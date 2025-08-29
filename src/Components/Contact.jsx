@@ -1,6 +1,38 @@
 import React, { useState } from "react";
 
 function Contact() {
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState("");
+
+  const API_URL =
+    process.env.NODE_ENV === "production"
+      ? "https://portfolio-backend-j744.onrender.com/api" // deployed backend
+      : "http://localhost:5000/api"; // local backend
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch(`${API_URL}/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        setStatus("Message sent successfully!");
+        setForm({ name: "", email: "", message: "" });
+      } else {
+        setStatus("❌ Something went wrong. Try again!");
+      }
+    } catch (err) {
+      setStatus("⚠️ Server error. Please try later.");
+    }
+  };
 
   return (
     <section id="contact" className="py-16 px-6 md:px-20 dark:text-white">
