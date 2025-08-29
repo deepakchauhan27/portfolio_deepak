@@ -8,9 +8,12 @@ function Contact() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // Always use deployed API in production
-  const API_URL = "https://portfolio-backend-j744.onrender.com/api";
-
+  // Use deployed backend URL in production
+  const API_URL =
+    process.env.NODE_ENV === "production"
+      ? "https://portfolio-backend-j744.onrender.com/api"
+      : "http://localhost:5000/api";
+      
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("Sending...");
