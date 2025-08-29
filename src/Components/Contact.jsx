@@ -8,25 +8,31 @@ function Contact() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const API_URL =
-    process.env.NODE_ENV === "production"
-      ? "https://portfolio-backend-j744.onrender.com/api"
-      : "http://localhost:5000/api";
+  // Always use deployed API in production
+  const API_URL = "https://portfolio-backend-j744.onrender.com/api";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setStatus("Sending...");
 
     try {
       const response = await fetch(`${API_URL}/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(form), // ✅ fixed here
       });
 
       const result = await response.json();
-      console.log("✅ Message sent:", result);
+
+      if (result.success) {
+        setStatus("✅ Message sent successfully!");
+        setForm({ name: "", email: "", message: "" }); // reset form
+      } else {
+        setStatus("❌ Failed to send message. Try again!");
+      }
     } catch (error) {
       console.error("❌ Error submitting form:", error);
+      setStatus("⚠️ Something went wrong. Please try again later.");
     }
   };
 
@@ -34,7 +40,7 @@ function Contact() {
     <section id="contact" className="py-16 px-6 md:px-20 dark:text-white">
       <form
         onSubmit={handleSubmit}
-        className="max-w-lg mx-auto p-6 rounded-xl shadow-lg"
+        className="max-w-lg mx-auto p-6 rounded-xl shadow-lg bg-white dark:bg-gray-900"
       >
         <input
           type="text"
@@ -43,7 +49,7 @@ function Contact() {
           value={form.name}
           onChange={handleChange}
           required
-          className="w-full mb-4 p-3 border rounded-lg"
+          className="w-full mb-4 p-3 border rounded-lg dark:bg-gray-800 dark:border-gray-600"
         />
         <input
           type="email"
@@ -52,7 +58,7 @@ function Contact() {
           value={form.email}
           onChange={handleChange}
           required
-          className="w-full mb-4 p-3 border rounded-lg"
+          className="w-full mb-4 p-3 border rounded-lg dark:bg-gray-800 dark:border-gray-600"
         />
         <textarea
           name="message"
@@ -60,7 +66,7 @@ function Contact() {
           value={form.message}
           onChange={handleChange}
           required
-          className="w-full mb-4 p-3 border rounded-lg h-32"
+          className="w-full mb-4 p-3 border rounded-lg h-32 dark:bg-gray-800 dark:border-gray-600"
         />
         <button
           type="submit"
