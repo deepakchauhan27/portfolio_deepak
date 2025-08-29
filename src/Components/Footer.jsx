@@ -1,12 +1,21 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
-import { faHackerrank } from "@fortawesome/free-brands-svg-icons";
+import {
+  faLinkedin,
+  faGithub,
+  faHackerrank,
+} from "@fortawesome/free-brands-svg-icons";
 
 function Footer() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState("");
   const [fade, setFade] = useState(true);
+
+  // Backend URL - use localhost in dev, Render in prod
+  const API_URL =
+    process.env.NODE_ENV === "production"
+      ? "https://portfolio-backend-j744.onrender.com/api/contact"
+      : "http://localhost:5000/api/contact";
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -18,12 +27,13 @@ function Footer() {
     setFade(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/contact", {
+      const res = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
       const data = await res.json();
+
       if (data.success) {
         setStatus("Message sent successfully ✅");
         setForm({ name: "", email: "", message: "" });
@@ -31,6 +41,7 @@ function Footer() {
         setStatus("Failed to send ❌");
       }
     } catch (err) {
+      console.error("Error sending message:", err);
       setStatus("Error sending message ❌");
     }
 
@@ -153,14 +164,13 @@ function Footer() {
               <FontAwesomeIcon icon={faHackerrank} className="text-green-500" />
             </a>
           </div>
-           {/* Footer Bottom */}
-          <div className=" mt-6 text-gray-400 text-sm">
-            &copy; {new Date().getFullYear()} Deepak Chauhan. All rights reserved.
+          {/* Footer Bottom */}
+          <div className="mt-6 text-gray-400 text-sm">
+            &copy; {new Date().getFullYear()} Deepak Chauhan. All rights
+            reserved.
           </div>
         </div>
       </div>
-
-     
     </footer>
   );
 }
