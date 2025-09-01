@@ -24,11 +24,8 @@ function Header_class() {
       } text-white`}
     >
       <div className="flex items-center justify-between px-6 py-4 backdrop:blur-2xl">
-        
         {/* Logo with animation */}
-        <div
-          className="relative text-3xl font-bold text-indigo-800 px-3 py-2 rounded-2xl group cursor-pointer"
-        >
+        <div className="relative text-3xl font-bold text-indigo-800 px-3 py-2 rounded-2xl group cursor-pointer">
           <span className="absolute inset-00 scale-0 group-hover:scale-100 transition-transform duration-300 ease-in-out origin-center z-[-1] rounded-2xl"></span>
           <span className="relative">DC</span>
         </div>
@@ -51,11 +48,12 @@ function Header_class() {
         {/* Resume Link (Desktop) with same hover animation */}
         <div className="hidden md:block">
           <a
-            href="/resume.pdf"
-            className="relative text-lg font-semibold px-4 py-2 rounded-2xl group overflow-hidden"
+            href="/Deepak_Chauhan_Resume.pdf"
+            // download="Deepak_Chauhan_Resume.pdf" // 👈 forces download with filename
+            className="bg-indigo-800 text-white text-center px-3 py-2 rounded-md hover:bg-indigo-700 transition"
+            onClick={() => setIsMenuOpen(false)}
           >
-            <span className="absolute inset-0 bg-indigo-800 scale-0 group-hover:scale-100 transition-transform duration-300 ease-in-out origin-center z-[-1] rounded-2xl"></span>
-            <span className="relative">Resume</span>
+            Resume
           </a>
         </div>
 
@@ -70,7 +68,7 @@ function Header_class() {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="absolute top-16 right-6 w-52 bg-indigo-300 shadow-lg rounded-xl flex flex-col gap-4 p-4 md:hidden">
+        <div className="absolute top-16 right-6 w-52 bg-gray-500 shadow-lg rounded-xl flex flex-col gap-4 p-4 md:hidden">
           {navItems.map((item) => (
             <a
               key={item}
@@ -82,8 +80,9 @@ function Header_class() {
             </a>
           ))}
           <a
-            href="/resume.pdf"
-            className="bg-indigo-800 text-white text-center px-3 py-2 rounded-md hover:bg-indigo-800 transition"
+            href="/Deepak_Chauhan_Resume.pdf"
+            download="Deepak_Chauhan_Resume.pdf" // 👈 forces download with filename
+            className="bg-indigo-800 text-white text-center px-3 py-2 rounded-md hover:bg-indigo-700 transition"
             onClick={() => setIsMenuOpen(false)}
           >
             Resume

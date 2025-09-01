@@ -84,7 +84,7 @@ function Footer() {
             />
             <button
               type="submit"
-              className="bg-orange-200 hover:bg-orange-300 text-black w-full py-2 rounded"
+              className="bg-indigo-600 hover:bg-indigo-800 text-white w-full py-2 rounded"
             >
               Send Message
             </button>
