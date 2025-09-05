@@ -11,16 +11,18 @@ function Footer() {
   const [status, setStatus] = useState("");
   const [fade, setFade] = useState(true);
 
-  // Backend URL - use localhost in dev, Render in prod
+  // Backend URL for Contact API
   const API_URL =
     process.env.NODE_ENV === "production"
       ? "https://portfolio-backend-j744.onrender.com/api/contact"
       : "http://localhost:5000/api/contact";
 
+  // Handle form input changes
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  // Submit form
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("Sending...");
@@ -45,16 +47,20 @@ function Footer() {
       setStatus("Error sending message ❌");
     }
 
+    // Fade and reset status
     setTimeout(() => setFade(false), 2500);
     setTimeout(() => setStatus(""), 3000);
   };
 
   return (
-    <footer className="dark:bg-[#05040d] text-white mt-16">
+    <footer
+      id="contact"
+      className="dark:bg-[#05040d] bg-gray-900 text-white mt-16 relative"
+    >
       <div className="max-w-6xl mx-auto py-12 px-6 grid md:grid-cols-3 gap-10">
         {/* Contact Form */}
         <div>
-          <h2 className="text-xl font-bold mb-4">Contact Me</h2>
+          <h2 className="text-xl font-bold mb-4 text-indigo-400">Contact Me</h2>
           <form onSubmit={handleSubmit} className="space-y-3">
             <input
               type="text"
@@ -63,7 +69,7 @@ function Footer() {
               value={form.name}
               onChange={handleChange}
               required
-              className="w-full p-2 rounded bg-gray-800 border border-gray-700"
+              className="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all"
             />
             <input
               type="email"
@@ -72,7 +78,7 @@ function Footer() {
               value={form.email}
               onChange={handleChange}
               required
-              className="w-full p-2 rounded bg-gray-800 border border-gray-700"
+              className="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all"
             />
             <textarea
               name="message"
@@ -80,17 +86,17 @@ function Footer() {
               value={form.message}
               onChange={handleChange}
               required
-              className="w-full p-2 rounded bg-gray-800 border border-gray-700 h-24"
+              className="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 h-28 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all resize-none"
             />
             <button
               type="submit"
-              className="bg-indigo-600 hover:bg-indigo-800 text-white w-full py-2 rounded"
+              className="w-full py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 hover:opacity-90 transition-opacity font-semibold"
             >
               Send Message
             </button>
             {status && (
               <p
-                className={`text-center transition-opacity duration-500 ${
+                className={`text-center mt-2 text-sm transition-opacity duration-500 ${
                   fade ? "opacity-100" : "opacity-0"
                 } ${
                   status.includes("✅")
@@ -108,44 +114,33 @@ function Footer() {
 
         {/* Quick Links */}
         <div>
-          <h2 className="text-xl font-bold mb-4">Quick Links</h2>
-          <ul className="space-y-2">
-            <li>
-              <a href="#about" className="hover:text-blue-400">
-                About
-              </a>
-            </li>
-            <li>
-              <a href="#education" className="hover:text-blue-400">
-                Education
-              </a>
-            </li>
-            <li>
-              <a href="#skills" className="hover:text-blue-400">
-                Tech Stack
-              </a>
-            </li>
-            <li>
-              <a href="#projects" className="hover:text-blue-400">
-                Projects
-              </a>
-            </li>
-            <li>
-              <a href="#contact" className="hover:text-blue-400">
-                Contact
-              </a>
-            </li>
+          <h2 className="text-xl font-bold mb-4 text-indigo-400">Quick Links</h2>
+          <ul className="space-y-2 text-gray-300">
+            {["About", "Education", "Tech Stack", "Projects", "Contact"].map(
+              (item) => (
+                <li key={item}>
+                  <a
+                    href={`#${item.toLowerCase().replace(" ", "")}`}
+                    className="hover:text-indigo-400 transition-colors"
+                  >
+                    {item}
+                  </a>
+                </li>
+              )
+            )}
           </ul>
         </div>
 
         {/* Social Media */}
         <div>
-          <h2 className="text-xl font-bold mb-4">Follow Me</h2>
+          <h2 className="text-xl font-bold mb-4 text-indigo-400">Follow Me</h2>
           <div className="flex gap-6 text-3xl">
             <a
               href="https://www.linkedin.com/in/deepak-chauhan-69426622b/"
               target="_blank"
               rel="noreferrer"
+              aria-label="LinkedIn"
+              className="hover:scale-110 transition-transform"
             >
               <FontAwesomeIcon icon={faLinkedin} className="text-blue-500" />
             </a>
@@ -153,21 +148,26 @@ function Footer() {
               href="https://github.com/Code-walah-07"
               target="_blank"
               rel="noreferrer"
+              aria-label="GitHub"
+              className="hover:scale-110 transition-transform"
             >
-              <FontAwesomeIcon icon={faGithub} className="text-gray-400" />
+              <FontAwesomeIcon icon={faGithub} className="text-gray-300" />
             </a>
             <a
               href="https://www.hackerrank.com/profile/dchauhan2159"
               target="_blank"
               rel="noreferrer"
+              aria-label="HackerRank"
+              className="hover:scale-110 transition-transform"
             >
               <FontAwesomeIcon icon={faHackerrank} className="text-green-500" />
             </a>
           </div>
+
           {/* Footer Bottom */}
-          <div className="mt-6 text-gray-400 text-sm">
-            &copy; {new Date().getFullYear()} Deepak Chauhan. All rights
-            reserved.
+          <div className="mt-6 text-gray-500 text-sm">
+            &copy; {new Date().getFullYear()}{" "}
+            <span className="text-white">Deepak Chauhan</span>. All rights reserved.
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@ function Header_class() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
 
-  const navItems = ["About", "Education", "Skills", "Projects", "Contact"];
+  const navItems = ["About", "Education", "Skills", "Projects"];
 
   // Detect scroll for sticky header shadow
   useEffect(() => {
