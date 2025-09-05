@@ -9,17 +9,16 @@ function Header_class() {
 
   const navItems = ["About", "Education", "Skills", "Projects"];
 
-  // Detect scroll for sticky header shadow
+  // Detect scroll for sticky header shadow and active section
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
 
-      // Highlight active section
       const sections = navItems.map((item) =>
         document.getElementById(item.toLowerCase())
       );
 
-      const scrollPosition = window.scrollY + 150; // offset for better detection
+      const scrollPosition = window.scrollY + 150; // Offset for better detection
       let current = "";
       sections.forEach((section, index) => {
         if (section && section.offsetTop <= scrollPosition) {
@@ -33,11 +32,25 @@ function Header_class() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [navItems]);
 
+  // Lock scroll when menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden"; // Disable background scroll
+    } else {
+      document.body.style.overflow = "auto"; // Restore scroll
+    }
+  }, [isMenuOpen]);
+
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? "backdrop-blur-md bg-black/50 shadow-lg" : "bg-transparent"
-      } text-white`}
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 
+        ${
+          isMenuOpen
+            ? "bg-gray-900 shadow-lg" // Solid background when menu is open
+            : isScrolled
+            ? "backdrop-blur-md bg-black/50 shadow-lg" // Blurred background when scrolled
+            : "bg-transparent"
+        } text-white`}
     >
       <div className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
         {/* Logo */}
@@ -89,10 +102,10 @@ function Header_class() {
 
       {/* Mobile Menu */}
       <div className="md:hidden">
-        {/* Overlay with blur (background only) */}
+        {/* Overlay */}
         {isMenuOpen && (
           <div
-            className="fixed inset-0 bg-black/40 backdrop-blur-md transition-opacity duration-300"
+            className="fixed inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-300"
             onClick={() => setIsMenuOpen(false)}
           ></div>
         )}
@@ -100,7 +113,7 @@ function Header_class() {
         {/* Side Menu */}
         <div
           className={`fixed top-0 right-0 h-full w-3/4 max-w-xs bg-gray-900 shadow-2xl transform transition-transform duration-300 ease-in-out z-50
-      ${isMenuOpen ? "translate-x-0" : "translate-x-full"}`}
+            ${isMenuOpen ? "translate-x-0" : "translate-x-full"}`}
         >
           <div className="flex flex-col gap-6 p-6">
             {/* Close Button */}
@@ -144,14 +157,6 @@ function Header_class() {
           </div>
         </div>
       </div>
-
-      {/* Overlay when mobile menu is open */}
-      {isMenuOpen && (
-        <div
-          className="fixed inset-0 bg-black/40 backdrop-blur-sm md:hidden"
-          onClick={() => setIsMenuOpen(false)}
-        ></div>
-      )}
     </header>
   );
 }
